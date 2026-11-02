@@ -1,0 +1,3 @@
+gamble.daveza.eu {
+    reverse_proxy gamble:6767
+}
