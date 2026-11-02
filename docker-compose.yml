@@ -5,26 +5,20 @@ services:
     restart: unless-stopped
     expose:
       - "6767"
-    # Not publishing 6767 to the host on purpose — only Caddy needs to
-    # reach it, over the internal docker network. Uncomment below only if
-    # you want to hit it directly for local debugging:
-    # ports:
-    #   - "6767:6767"
 
-  caddy:
+  gamble-caddy:
     image: caddy:2-alpine
     container_name: gamble-caddy
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8443:8443"   # custom port, doesn't touch your existing 80/443
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - gamble_caddy_data:/data
+      - gamble_caddy_config:/config
     depends_on:
       - gamble
 
 volumes:
-  caddy_data:
-  caddy_config:
+  gamble_caddy_data:
+  gamble_caddy_config:
