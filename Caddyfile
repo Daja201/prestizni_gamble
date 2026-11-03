@@ -1,8 +1,8 @@
 {
-    auto_https off
+	debug
 }
 
-:8443 {
+https://:8443 {
     tls internal
     reverse_proxy gamble:6767
 }

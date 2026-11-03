@@ -5,20 +5,9 @@ services:
     restart: unless-stopped
     expose:
       - "6767"
+    networks:
+      - b1tm4p_default
 
-  gamble-caddy:
-    image: caddy:2-alpine
-    container_name: gamble-caddy
-    restart: unless-stopped
-    ports:
-      - "8443:8443"   # custom port, doesn't touch your existing 80/443
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - gamble_caddy_data:/data
-      - gamble_caddy_config:/config
-    depends_on:
-      - gamble
-
-volumes:
-  gamble_caddy_data:
-  gamble_caddy_config:
+networks:
+  b1tm4p_default:
+    external: true
